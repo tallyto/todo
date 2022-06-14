@@ -19,7 +19,7 @@ public class TodoController {
     }
 
     @GetMapping("{id}")
-    public Todo getById(Long id) {
+    public Todo getById(@PathVariable Long id) {
         return repository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

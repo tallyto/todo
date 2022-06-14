@@ -1,5 +1,6 @@
 package com.springcourse.todo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,8 +23,15 @@ public class Todo {
     private Boolean done;
 
     @Column
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss") // formatação da data
     private LocalDateTime createdDate;
 
     @Column
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss") // formatação da data
     private LocalDateTime doneDate;
+
+    @PrePersist
+    public void beforeInsert() {
+        setCreatedDate(LocalDateTime.now());
+    }
 }
